@@ -1,0 +1,75 @@
+# Please see the documentation for all configuration options: 
+# https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "nuget"
+    directories: 
+      - "/src/DataLoopCore"
+    open-pull-requests-limit: 10
+    schedule:
+      interval: "daily"
+    ignore:
+      - dependency-name: "FluentAssertions*"
+        update-types: ["version-update:semver-major"] # v8+ demande une licence commerciale
+      - dependency-name: "Microsoft*"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "csharpier*"
+      - dependency-name: "Aspire*"
+      - dependency-name: "MediatR*"
+    assignees:
+      - "pacoteinnov"
+  - package-ecosystem: "npm"
+    directory: "/src/DataLoopCore/Apps/Admin/DataLoopCore.Apps.Administrator/ClientApp" # Location of package manifests
+    open-pull-requests-limit: 10
+    schedule:
+      interval: "weekly"
+    assignees:
+      - "vabic"
+      - "sampain"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-patch"]
+    groups:
+      Vitest:
+        patterns:
+          - "vitest"
+          - "@vitest/coverage-v8"
+          - "@vitest/ui"
+      MUI:
+        patterns:
+          - "@mui/icons-material"
+          - "@mui/material"
+          - "@mui/system"
+      MUI-X:
+        patterns:
+          - "@mui/x-charts"
+          - "@mui/x-data-grid"
+          - "@mui/x-data-grid-pro"
+          - "@mui/x-license"
+          - "@mui/x-date-pickers-pro"
+      React:
+        patterns:
+          - "react"
+          - "react-dom"
+      React Router:
+        patterns:
+          - "react-router"
+          - "react-router-dom"
+      ESLint:
+        patterns:
+          - "@eslint/js"
+          - "eslint"
+          - "eslint-config-prettier"
+          - "eslint-import-resolver-typescript"
+          - "eslint-plugin-jest-dom"
+          - "eslint-plugin-jsx-a11y"
+          - "eslint-plugin-playwright"
+          - "eslint-plugin-react-hooks"
+          - "eslint-plugin-testing-library"
+          - "typescript-eslint"
+          - "@eslint-react/eslint-plugin"
